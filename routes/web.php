@@ -18,10 +18,8 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::resource('usuarios', 'UsuarioController');
     Route::resource('users', 'UserController');
-    Route::patch('/users/{id}/reset',[
-        'as' => 'users.reset',
-        'uses' => 'UserController@reset'
-    ]);
+    Route::patch('/users/{id}/reset','UserController@reset')->name('users.reset');
+    Route::get('/users/{id}/reset', 'UserController@resetview')->name('users.reset');
     Route::resource('dashboard', 'DashBoardController');
     Route::resource('tag', 'TagController');
     Route::resource('brand', 'BrandController');
@@ -31,4 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function (){
+    return redirect('/dashboard');
+});
+// Route::get('/home', 'HomeController@index')->name('home');

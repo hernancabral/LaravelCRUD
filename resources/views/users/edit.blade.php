@@ -17,20 +17,6 @@
         </ul>
       </div><br />
     @endif
-      <!-- <form method="post" action="{{ route('users.update', $user->id) }}">
-          <div class="form-group">
-              @csrf
-              @method('PATCH')
-              <label for="name">Nombre:</label>
-              <input type="text" class="form-control" name="name" value="{{$user->name}}"/>
-          </div>
-          <div class="form-group">
-              <label for="price">Email:</label>
-              <input type="text" class="form-control" name="email" value="{{$user->email}}"/>
-          </div>
-          <button type="submit" class="btn btn-primary">Actualizar informacion</button>
-      </form>
-  </div> -->
 
   <div class="card-body">
       <form method="POST" action="{{ route('users.update', $user->id) }}">
@@ -69,11 +55,6 @@
                   <button type="submit" class="btn btn-primary">
                       {{ __('Actualizar') }}
                   </button>
-                  <form action="{{ route('users.reset', $user->id) }}" method="post">
-                    @csrf
-                    @method('patch')
-                    <button class="btn btn-danger" type="submit">Reset</button>
-                  </form>
               </div>
               
           </div>

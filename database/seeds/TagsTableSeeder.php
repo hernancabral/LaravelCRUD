@@ -13,12 +13,6 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tags')->insert([
-            'code' => Str::random(10),
-            'name' => Str::random(10),
-        ]);
-
-        $users = factory(App\Tag::class, 10)
-           ->create();
+        factory(App\Tag::class, 10)->create();       
     }
 }

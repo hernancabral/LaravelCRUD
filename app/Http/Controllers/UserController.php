@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(10);
 
         return view('users.index', compact('users'));
     }
@@ -85,7 +85,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:users,name'
+            'name' => 'required|unique:users,name,' . $id,
         ]);
 
         User::whereId($id)->update($validatedData);
@@ -93,14 +93,20 @@ class UserController extends Controller
         return redirect('/users')->with('success', 'Se actualizo correctamente');
     }
 
-    public function reset($id)
+    public function resetview($id)
     {
+        $user = User::findOrFail($id);
+        return view('users.reset', compact('user'));
+    }
 
-        // $validatedData['password'] = Hash::make($validatedData['password']);
-        // $user = User::create($validatedData);
+    public function reset(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'password' => 'required|confirmed'
+        ]);
 
-        $pass = ['password' => Hash::make('glamit10')];
-        User::whereId($id)->update($pass);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        User::whereId($id)->update($validatedData);
 
         return redirect('/users')->with('success', 'Se actualizo correctamente');
     }

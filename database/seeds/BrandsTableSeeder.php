@@ -11,12 +11,6 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('brands')->insert([
-            'code' => Str::random(10),
-            'name' => Str::random(10),
-        ]);
-
-        $users = factory(App\Brand::class, 10)
-           ->create();
+        factory(App\Brand::class, 10)->create();
     }
 }

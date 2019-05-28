@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class MilestonesTableSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class MilestonesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Milestone::class, 10)->create();
     }
 }

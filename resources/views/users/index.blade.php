@@ -21,7 +21,7 @@
           <td>Nombre</td>
           <td>Mail</td>
           <td>Fecha de Creacion</td>
-          <td style="width: 60px" colspan="2">Accion</td>
+          <td style="width: 90px" colspan="3" class="text-center">Accion</td>
         </tr>
     </thead>
     <tbody>
@@ -30,17 +30,22 @@
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
             <td>{{$user->created_at}}</td>
-            <td style="width: 30px"><a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary">Edit</a></td>
+            <td style="width: 30px"><a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary">Editar</a></td>
+            <td style="width: 30px">
+                <a href="{{ route('users.reset', $user->id) }}" class="btn btn-warning">Resetar Password</a>
+            </td> 
             <td style="width: 30px">
                 <form action="{{ route('users.destroy', $user->id) }}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
                 </form>
-            </td>            
+            </td>               
         </tr>
         @endforeach
     </tbody>
   </table>
+  <div>{{ $users->links() }}</div>
 <div>
+
 @endsection

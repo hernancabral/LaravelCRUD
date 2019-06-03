@@ -5,9 +5,48 @@
 @section('content')
 <h1>Usuarios</h1>
 
+
 <div>
     <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo Usuario</a>
 </div>
+
+{{-- Filtros --}}
+<form class="p-3" action="{{ route('users.index') }}">
+  <div class="row">
+    <div class="col-md-4">
+      <input class="form-control form-control-sm" type="search" name="q" value="{{ $q }}">
+    </div>
+
+    <div class="col-md-2 col-3">
+      <select name="sortBy" class="form-control form-control-sm" value="{{ $sortBy }}">
+        {{ $opciones = ['nombre' => 'name', 'email' => 'email']}}
+        @foreach( $opciones as $filtro => $col)
+          <option @if($filtro == $sortBy) selected @endif value="{{ $col }}">{{ ucfirst($filtro) }}</option>
+        @endforeach
+      </select>
+    </div>
+
+    <div class="col-md-2 col-3">
+      <select name="orderBy" class="form-control form-control-sm" value="{{ $orderBy }}">
+        @foreach(['asc', 'desc'] as $order)
+          <option @if($order == $orderBy) selected @endif value="{{ $order }}">{{ ucfirst($order) }}</option>
+        @endforeach
+      </select>
+    </div>
+
+    <div class="col-md-2 col-3">
+      <select name="perPage" class="form-control form-control-sm" value="{{ $perPage }}">
+        @foreach(['10', '20','50','100'] as $page)
+          <option @if($page == $perPage) selected @endif value="{{ $page }}">{{ $page }}</option>
+        @endforeach
+      </select>
+    </div>
+
+    <div class="col-md-2 col-3">
+      <button type="submit" class="w-100 btn btn-sm bg-blue">Filtrar</button>
+    </div>
+  </div>
+
 
 <div class="p-3">
   @if(session()->get('success'))

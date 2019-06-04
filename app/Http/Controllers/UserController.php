@@ -40,7 +40,6 @@ class UserController extends Controller
     public function create()
     {
         return view('users.create');
-        // return view('auth.register');
     }
 
     // // /**
@@ -52,14 +51,14 @@ class UserController extends Controller
      public function store(Request $request)
      {
          $validatedData = $request->validate([
-             'name' => 'required',
+             'name' => 'required|unique:users,name',
              'email' => 'required|unique:users,email',
              'password' => 'required|confirmed',
          ]);
          $validatedData['password'] = Hash::make($validatedData['password']);
          $user = User::create($validatedData);
 
-         return redirect('/users')->with('success', 'Se guardo el Usuario!');
+         return redirect('/users')->with(['msg' => 'success','txt' => 'Se guardo el Usuario!']);
      }
 
     /**
@@ -101,7 +100,7 @@ class UserController extends Controller
 
         User::whereId($id)->update($validatedData);
 
-        return redirect('/users')->with('success', 'Se actualizo correctamente');
+        return redirect('/users')->with(['msg' => 'success','txt' => 'Se actualizo correctamente']);
     }
 
     public function resetview($id)
@@ -119,7 +118,7 @@ class UserController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
         User::whereId($id)->update($validatedData);
 
-        return redirect('/users')->with('success', 'Se actualizo correctamente');
+        return redirect('/users')->with(['msg' => 'success','txt' => 'Se actualizo correctamente']);
     }
 
     /**
@@ -133,6 +132,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect('/users')->with('success', 'Se ha borrado el usuario');
+        return redirect('/users')->with(['msg' => 'success','txt' => 'Se actualizo correctamente']);
     }
 }

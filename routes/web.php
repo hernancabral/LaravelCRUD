@@ -16,14 +16,15 @@ Route::group(['middleware' => ['auth']], function () {
         return redirect('/dashboard');
     });
     
-    Route::resource('usuarios', 'UsuarioController');
-    Route::resource('users', 'UserController');
+    
     Route::patch('/users/{id}/reset','UserController@reset')->name('users.reset');
     Route::get('/users/{id}/reset', 'UserController@resetview')->name('users.reset');
+    Route::resource('users', 'UserController');
     Route::resource('dashboard', 'DashBoardController');
     Route::resource('tag', 'TagController');
     Route::resource('brand', 'BrandController');
     Route::resource('milestone', 'MilestoneController');
+    Route::resource('planning', 'PlanningController');
     
 });
 

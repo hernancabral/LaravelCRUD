@@ -61,7 +61,7 @@
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Plannings</a>
+                            <a class="nav-link" href="{{ route('planning.index') }}">Plannings</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/">Teams</a>

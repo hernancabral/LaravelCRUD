@@ -17,14 +17,13 @@ class CreatePlanningsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->unsignedBigInteger('tag_id');
-            $table->string('state');
-            $table->time('date_from');
-            $table->time('date_to');
-            $table->unsignedBigInteger('team_id');
+            //$table->string('state');
+            //$table->time('date_from');
+            //$table->time('date_to');
+            //$table->unsignedBigInteger('team_id');
             $table->timestamps();
 
             $table->foreign('tag_id')->references('id')->on('tags')->onUpdate('cascade');
-            // $table->foreign('milestone_id')->references('id')->on('milestones')->onUpdate('cascade');
         });
     }
 

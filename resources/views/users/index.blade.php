@@ -19,9 +19,8 @@
 
     <div class="col-md-2 col-3">
       <select name="sortBy" class="form-control form-control-sm" value="{{ $sortBy }}">
-        {{ $opciones = ['nombre' => 'name', 'email' => 'email']}}
-        @foreach( $opciones as $filtro => $col)
-          <option @if($filtro == $sortBy) selected @endif value="{{ $col }}">{{ ucfirst($filtro) }}</option>
+        @foreach($opciones as $filtro => $col)
+          <option @if($col == $sortBy) selected @endif value="{{ $col }}">Buscar por {{ ucfirst($filtro) }}</option>
         @endforeach
       </select>
     </div>
@@ -29,20 +28,20 @@
     <div class="col-md-2 col-3">
       <select name="orderBy" class="form-control form-control-sm" value="{{ $orderBy }}">
         @foreach(['asc', 'desc'] as $order)
-          <option @if($order == $orderBy) selected @endif value="{{ $order }}">{{ ucfirst($order) }}</option>
+          <option @if($order == $orderBy) selected @endif value="{{ $order }}">Orden {{ ucfirst($order) }}endente</option>
         @endforeach
       </select>
     </div>
 
-    <div class="col-md-2 col-3">
+    <div class="col-md-3 col-3">
       <select name="perPage" class="form-control form-control-sm" value="{{ $perPage }}">
         @foreach(['10', '20','50','100'] as $page)
-          <option @if($page == $perPage) selected @endif value="{{ $page }}">{{ $page }}</option>
+          <option @if($page == $perPage) selected @endif value="{{ $page }}">Mostrar {{ $page }} por pagina</option>
         @endforeach
       </select>
     </div>
 
-    <div class="col-md-2 col-3">
+    <div class="col-md-1 col-3">
       <button type="submit" class="w-100 btn btn-sm bg-blue">Filtrar</button>
     </div>
   </div>

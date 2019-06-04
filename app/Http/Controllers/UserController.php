@@ -26,8 +26,9 @@ class UserController extends Controller
         if ($request->has('perPage')) $perPage = $request->query('perPage');
         if ($request->has('q')) $q = $request->query('q');
     
+        $opciones = ['nombre' => 'name', 'email' => 'email'];
         $users = User::search($q)->orderBy($sortBy, $orderBy)->paginate($perPage);
-        return view('users.index', compact('users', 'orderBy', 'sortBy', 'q', 'perPage', 'users'));
+        return view('users.index', compact('users', 'orderBy', 'sortBy', 'q', 'perPage', 'users', 'opciones'));
 
     }
 
